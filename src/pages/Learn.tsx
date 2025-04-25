@@ -1,8 +1,9 @@
 import { NavLink } from "react-router-dom";
+import videoPng from '../assets/video.png'
 
 export default function Learn() {
     return <div className="container mx-auto p-5 min-h-screen">
-        <h2 className="text-3xl font-bold mt-10">Belajar materi terkait</h2>
+        <h2 className="text-2xl md:text-3xl font-bold mt-10">Belajar materi terkait</h2>
 
         <div className="flex flex-col mt-7 shadow-xl">
             <Card title="Setup Project React" />
@@ -20,7 +21,7 @@ function Card({title}: {title: string}) {
             <div className="card bg-base-200 shadow-sm">
                 <figure>
                     <img
-                        src="/video.png"
+                        src={videoPng}
                         alt="Shoes" />
                 </figure>
                 <div className="card-body">

@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import videoPng from '../assets/video.png'
 
 export default function Watch() {
     return <div className="container mx-auto p-5 min-h-screen">
@@ -21,10 +22,11 @@ export default function Watch() {
             </div>
             <div className="flex flex-col gap-y-8">
                 <span className="font-bold text-2xl">Next Materi</span>
+
                 <div className="card bg-base-200 shadow-sm">
                     <figure>
                         <img
-                            src="/video.png"
+                            src={videoPng}
                             alt="Shoes" />
                     </figure>
                     <div className="card-body">
@@ -38,7 +40,7 @@ export default function Watch() {
                 <div className="card bg-base-200 shadow-sm">
                     <figure>
                         <img
-                            src="/video.png"
+                            src={videoPng}
                             alt="Shoes" />
                     </figure>
                     <div className="card-body">
@@ -52,7 +54,7 @@ export default function Watch() {
                 <div className="card bg-base-200 shadow-sm">
                     <figure>
                         <img
-                            src="/video.png"
+                            src={videoPng}
                             alt="Shoes" />
                     </figure>
                     <div className="card-body">

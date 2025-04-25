@@ -1,26 +1,27 @@
 import { NavLink } from "react-router-dom";
+import videoPng from '../assets/video.png'
 
 export default function Home() {
     return <div className="container mx-auto p-5">
-        <h2 className="text-4xl font-semibold text-center mt-10">Progress Pembuatan Aplikasi</h2>
+        <h2 className="text-2xl md:text-4xl font-semibold text-center mt-10">Progress Pembuatan Aplikasi</h2>
 
         <div className="grid gap-y-3 md:grid-cols-3 gap-x-12 mt-10 items-start">
-            <span className="block font-semibold text-2xl md:sticky top-32 left-0">Klik Pada progress untuk belajar</span>
+            <span className="block font-semibold text-lg md:text-2xl md:sticky top-32 left-0">Klik Pada progress untuk belajar</span>
 
             <ul className="steps steps-vertical">
-                <li className="step text-xl hover:text-primary cursor-pointer step-primary">Register</li>
-                <li className="step text-xl hover:text-primary cursor-pointer step-primary">Choose plan</li>
-                <li className="step text-xl hover:text-primary cursor-pointer">Receive Product</li>
-                <li className="step text-xl hover:text-primary cursor-pointer">Purchase</li>
-                <li className="step text-xl hover:text-primary cursor-pointer">Receive Product</li>
-                <li className="step text-xl hover:text-primary cursor-pointer italic">Coming Soon...</li>
+                <li className="step md:text-xl hover:text-primary cursor-pointer step-primary">Register</li>
+                <li className="step md:text-xl hover:text-primary cursor-pointer step-primary">Choose plan</li>
+                <li className="step md:text-xl hover:text-primary cursor-pointer">Receive Product</li>
+                <li className="step md:text-xl hover:text-primary cursor-pointer">Purchase</li>
+                <li className="step md:text-xl hover:text-primary cursor-pointer">Receive Product</li>
+                <li className="step md:text-xl hover:text-primary cursor-pointer italic">Coming Soon...</li>
             </ul>
 
             <div className="grid grid-cols-1 gap-y-6">
                 <div className="card bg-base-200 shadow-sm">
                     <figure>
                         <img
-                            src="/video.png"
+                            src={videoPng}
                             alt="Shoes" />
                     </figure>
                     <div className="card-body">
