@@ -1,6 +1,13 @@
 import axios from "axios"
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 export default function Login() {
+    const navigate = useNavigate()
+    useEffect(() => {
+        if(localStorage.getItem('token')) navigate('/')
+    }, [])
+
     const loginHandler = async (e: any) => {
         e.preventDefault()
 
@@ -10,7 +17,7 @@ export default function Login() {
         try {
             const res = await axios.post(import.meta.env.VITE_SERVER_URL + "/login", { username, password })
             localStorage.setItem("token", res.data.token);
-            console.log(res.data);
+            navigate('/')
         } catch (error: any) {
             console.log(error.response);
         }
