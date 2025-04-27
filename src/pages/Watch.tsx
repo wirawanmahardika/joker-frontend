@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { AxiosAuth } from "../utils/axios";
 import { tutorialType } from "../types/tutorialType";
 import dayjs from "dayjs";
+import { tutorialTambahanType } from "../types/tutorialTambahanType";
 
 
 export default function Watch() {
@@ -12,6 +13,7 @@ export default function Watch() {
 
     const [tutorial, setTutorial] = useState<tutorialType>()
     const [tutorials, setTutorials] = useState<tutorialType[]>([])
+    const [tutorialTambahans, setTutorialTambahans] = useState<tutorialTambahanType[]>([])
 
     useEffect(() => {
         AxiosAuth.get("/tutorial/" + id_tutorial)
@@ -35,6 +37,19 @@ export default function Watch() {
         }
     }, [tutorial])
 
+    useEffect(() => {
+        if (tutorial?.created_at) {
+            AxiosAuth.get(`http://localhost:3000/tutorial/${id_step}/tutorial-tambahans`)
+                .then(res => {
+                    const tutorialTambahans = res.data.data as tutorialTambahanType[]
+                    setTutorialTambahans(tutorialTambahans)
+                }).catch((err: any) => {
+                    if (err.status === 404) setTutorialTambahans([]);
+                    console.log(err);
+                })
+        }
+    }, [tutorial])
+
 
     return <div className="container mx-auto p-5 min-h-screen">
         <div className="grid md:grid-cols-3 gap-5">
@@ -46,10 +61,8 @@ export default function Watch() {
                 <div className="flex flex-col py-5">
                     <h2 className="font-bold text-2xl">{tutorial?.name}</h2>
                     <span className="mt-5 text-lg font-semibold">Source Belajar Tambahan : </span>
-                    <ul className="text-sm">
-                        <li>HTML : <a className="text-blue-600" href="https://www.w3schools.com/">w3school</a></li>
-                        <li>CSS : <a className="text-blue-600" href="https://www.w3schools.com/">w3school</a></li>
-                        <li>Javascript : <a className="text-blue-600" href="https://www.w3schools.com/">w3school</a></li>
+                    <ul className="text-sm list-disc list-inside">
+                        {tutorialTambahans.map(t => <li><a className="text-blue-600" href={t.link}>{t.name}</a></li>)}
                     </ul>
                 </div>
             </div>
