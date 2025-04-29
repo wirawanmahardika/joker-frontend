@@ -10,10 +10,10 @@ AxiosAuth.interceptors.request.use((config) => {
     return config
 })
 
-AxiosAuth.interceptors.response.use((response) => {
-    if (response.status === 404) {
+AxiosAuth.interceptors.response.use((res) => res, (err) => {
+    if (err.status === 401) {
         localStorage.removeItem('token')
         window.location.href = "/login"
     }
-    return response
+    return err
 })

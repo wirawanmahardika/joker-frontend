@@ -17,11 +17,7 @@ export default function Watch() {
 
     useEffect(() => {
         AxiosAuth.get("/tutorial/" + id_tutorial)
-            .then(res => {
-                setTutorial(res.data.data)
-            }).catch(err => {
-                console.log(err);
-            })
+            .then(res => { setTutorial(res.data.data) }).catch(err => { console.log(err); })
     }, [])
 
     useEffect(() => {
@@ -39,17 +35,16 @@ export default function Watch() {
 
     useEffect(() => {
         if (tutorial?.created_at) {
-            AxiosAuth.get(`http://localhost:3000/tutorial/${id_step}/tutorial-tambahans`)
+            AxiosAuth.get(`http://localhost:3000/tutorial/${id_tutorial}/tutorial-tambahans`)
                 .then(res => {
-                    const tutorialTambahans = res.data.data as tutorialTambahanType[]
-                    setTutorialTambahans(tutorialTambahans)
+                    const tutorialTambahans = res.data?.data as tutorialTambahanType[] | undefined
+                    setTutorialTambahans(tutorialTambahans || [])
                 }).catch((err: any) => {
                     if (err.status === 404) setTutorialTambahans([]);
                     console.log(err);
                 })
         }
     }, [tutorial])
-
 
     return <div className="container mx-auto p-5 min-h-screen">
         <div className="grid md:grid-cols-3 gap-5">
