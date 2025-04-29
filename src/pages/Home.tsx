@@ -37,7 +37,7 @@ export default function Home() {
             <span className="block font-semibold text-lg md:text-2xl md:sticky top-32 left-0">Klik Pada progress untuk belajar</span>
 
             <ul className="steps steps-vertical">
-                {steps.map(s => <li key={s.id} onClick={() => getTutorials(s.id)} className="step md:text-xl hover:text-primary cursor-pointer step-primary">{s.name}</li>)}
+                {steps.map(s => <li key={s.id} onClick={() => getTutorials(s.id)} className={`step md:text-xl hover:text-primary cursor-pointer ${s.status && "step-primary"}`}>{s.name}</li>)}
             </ul>
 
             <div className="grid grid-cols-1 gap-y-6">
