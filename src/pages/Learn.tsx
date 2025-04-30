@@ -10,12 +10,9 @@ export default function Learn() {
 
     const [steps, setStep] = useState<stepType[]>([])
     useEffect(() => {
-        AxiosAuth.get("http://localhost:3000/steps")
-            .then(res => {
-                setStep(res.data.data);
-            }).catch(err => {
-                console.log(err);
-            })
+        AxiosAuth.get("/steps")
+            .then(res => { setStep(res.data.data); })
+            .catch(() => { console.log("terjadi kesalahan"); })
     }, [])
 
 
@@ -32,12 +29,10 @@ function Card({ id, title }: { id: number; title: string; }) {
     const [tutorials, setTutorials] = useState<tutorialType[]>([])
 
     useEffect(() => {
-        AxiosAuth.get("http://localhost:3000/tutorials?id_step=" + id)
-            .then(res => {
-                setTutorials(res.data.data);
-            }).catch((err: any) => {
+        AxiosAuth.get("/tutorials?id_step=" + id)
+            .then(res => { setTutorials(res.data.data); }).catch((err: any) => {
                 if (err.status === 404) setTutorials([]);
-                console.log(err);
+                console.log("Terjadi kesalahan");
             })
     }, [])
 

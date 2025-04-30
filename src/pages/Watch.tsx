@@ -17,31 +17,32 @@ export default function Watch() {
 
     useEffect(() => {
         AxiosAuth.get("/tutorial/" + id_tutorial)
-            .then(res => { setTutorial(res.data.data) }).catch(err => { console.log(err); })
+            .then(res => { setTutorial(res.data.data) })
+            .catch(() => { console.log("Terjadi kesalahan"); })
     }, [])
 
     useEffect(() => {
         if (tutorial?.created_at) {
-            AxiosAuth.get("http://localhost:3000/tutorials?id_step=" + id_step)
+            AxiosAuth.get("/tutorials?id_step=" + id_step)
                 .then(res => {
                     const tutorials = res.data.data as tutorialType[]
                     setTutorials(tutorials.filter(t => dayjs(t.created_at).isAfter(tutorial?.created_at)));
                 }).catch((err: any) => {
                     if (err.status === 404) setTutorials([]);
-                    console.log(err);
+                    console.log("Terjadi kesalahan");
                 })
         }
     }, [tutorial])
 
     useEffect(() => {
         if (tutorial?.created_at) {
-            AxiosAuth.get(`http://localhost:3000/tutorial/${id_tutorial}/tutorial-tambahans`)
+            AxiosAuth.get(`/tutorial/${id_tutorial}/tutorial-tambahans`)
                 .then(res => {
                     const tutorialTambahans = res.data?.data as tutorialTambahanType[] | undefined
                     setTutorialTambahans(tutorialTambahans || [])
                 }).catch((err: any) => {
                     if (err.status === 404) setTutorialTambahans([]);
-                    console.log(err);
+                    console.log("Terjadi kesalahan");
                 })
         }
     }, [tutorial])

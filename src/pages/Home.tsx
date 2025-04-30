@@ -12,22 +12,15 @@ export default function Home() {
     const [tutorials, setTutorials] = useState<tutorialType[]>([])
 
     useEffect(() => {
-        AxiosAuth.get("http://localhost:3000/steps")
-            .then(res => {
-                setStep(res.data.data);
-            }).catch(err => {
-                console.log(err);
-            })
+        AxiosAuth.get("/steps")
+            .then(res => { setStep(res.data.data); })
+            .catch(() => { console.log("terjadi kesalahan"); })
     }, [])
 
     const getTutorials = (idStep: number) => {
-        AxiosAuth.get("http://localhost:3000/tutorials?id_step=" + idStep)
-            .then(res => {
-                setTutorials(res.data.data);
-            }).catch((err: any) => {
-                if (err.status === 404) setTutorials([]);
-                console.log(err);
-            })
+        AxiosAuth.get("/tutorials?id_step=" + idStep)
+            .then(res => { setTutorials(res.data.data); })
+            .catch((err: any) => { if (err.status === 404) setTutorials([]); console.log("Terjadi kesalahan"); })
     }
 
     return <div className="container mx-auto p-5">
