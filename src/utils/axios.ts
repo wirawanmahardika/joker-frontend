@@ -15,5 +15,5 @@ AxiosAuth.interceptors.response.use((res) => res, (err) => {
         localStorage.removeItem('token')
         window.location.href = "/login"
     }
-    return err
+    return Promise.reject(err)
 })
