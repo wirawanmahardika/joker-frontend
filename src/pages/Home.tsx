@@ -19,11 +19,9 @@ export default function Home() {
     }, [])
 
     const getTutorials = (idStep: number) => {
+        if (!progressClicked) setProgressClicked(true)
         AxiosAuth.get("/tutorials?id_step=" + idStep)
-            .then(res => {
-                if (!progressClicked) setProgressClicked(true)
-                setTutorials(res.data.data);
-            })
+            .then(res => { setTutorials(res.data.data); })
             .catch((err: any) => { if (err.status === 404) setTutorials([]); console.log("Terjadi kesalahan"); })
     }
 
