@@ -19,7 +19,7 @@ export default function Watch() {
         AxiosAuth.get("/tutorial/" + id_tutorial)
             .then(res => { setTutorial(res.data.data) })
             .catch(() => { console.log("Terjadi kesalahan"); })
-    }, [])
+    }, [id_step, id_tutorial])
 
     useEffect(() => {
         if (tutorial?.created_at) {
@@ -50,23 +50,30 @@ export default function Watch() {
     return <div className="container mx-auto p-5 min-h-screen">
         <div className="grid md:grid-cols-3 gap-5">
             <div className="md:col-span-2 flex flex-col">
-                <video className="w-full shadow-md border border-base-300" controls>
+                <video key={tutorial?.video} className="w-full shadow-md border border-base-300" controls>
                     {tutorial?.video && <source src={tutorial.video} type="video/mp4" />}
                 </video>
 
                 <div className="flex flex-col py-5">
                     <h2 className="font-bold text-2xl">{tutorial?.name}</h2>
+                    <p className="mt-2">{tutorial?.description}</p>
                     <span className="mt-5 text-lg font-semibold">Source Belajar Tambahan : </span>
-                    <ul className="text-sm list-disc list-inside">
-                        {tutorialTambahans.map(t => <li><a className="text-blue-600" href={t.link}>{t.name}</a></li>)}
-                    </ul>
+                    {tutorialTambahans.length > 0 ?
+                        <ul className="text-sm list-disc list-inside">
+                            {tutorialTambahans.map(t => <li><a className="text-blue-600" href={t.link}>{t.name}</a></li>)}
+                        </ul>
+                        :
+                        <div className="grid place-items-center h-32 md:h-full bg-base-200 rounded p-5 mt-3">
+                            <span className="font-medium text-lg m-auto italic">Tidak ada sumber belajar tambahan</span>
+                        </div>
+                    }
                 </div>
             </div>
 
             <div className="flex flex-col gap-y-8">
                 <span className="font-bold text-2xl">Next Materi</span>
 
-                {tutorials.map(t => {
+                {tutorials.length ? tutorials.map(t => {
                     return <div key={t.id} className="card bg-base-200 shadow-sm">
                         <figure>
                             <img className="w-full"
@@ -81,7 +88,12 @@ export default function Watch() {
                             </div>
                         </div>
                     </div>
-                })}
+                })
+                    :
+                    <div className="grid place-items-center h-32 md:h-full bg-base-200 rounded p-5">
+                        <span className="font-medium text-lg m-auto italic">Tidak ada materi selanjutnya</span>
+                    </div>
+                }
             </div>
         </div>
     </div>
